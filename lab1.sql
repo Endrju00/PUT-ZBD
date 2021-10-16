@@ -1,0 +1,129 @@
+--SET SERVEROUTPUT ON;
+----
+----zad1
+--DECLARE
+--    vTekst VARCHAR(40) DEFAULT 'Witaj, swiecie!';
+--    vLiczba NUMBER DEFAULT 1000.456;
+--BEGIN
+--    DBMS_OUTPUT.PUT_LINE('Zmienna vTekst: ' || vTekst);
+--    DBMS_OUTPUT.PUT_LINE('Zmienna vLiczba: ' || vLiczba);
+--END;
+
+----zad2
+--DECLARE
+--    vTekst VARCHAR(40) DEFAULT 'Witaj, œwiecie!';
+--    vLiczba NUMBER DEFAULT 1000.456;
+--BEGIN
+--    vTekst := CONCAT(vTekst, ' Witaj nowy dniu!');
+--    vLiczba := vLiczba + POWER(10, 15);
+--    DBMS_OUTPUT.PUT_LINE('Zmienna vTekst: ' || vTekst);
+--    DBMS_OUTPUT.PUT_LINE('Zmienna vLiczba: ' || vLiczba);
+--END;
+
+----zad3
+--DECLARE
+--    vLiczba1 NUMBER DEFAULT 10.2356000;
+--    vLiczba2 NUMBER DEFAULT 0.0000001;
+--    vSuma NUMBER;
+--BEGIN
+--    vSuma := vLiczba1 + vLiczba2;
+--    DBMS_OUTPUT.PUT_LINE('Wynik dodawania ' || vLiczba1 || ' i ' || vLiczba2 || ': ' || vSuma);
+--END;
+
+----zad4
+--DECLARE
+--    vPromien NUMBER DEFAULT 5;
+--    vObwod NUMBER;
+--    vPole NUMBER;
+--    cPI CONSTANT NUMBER DEFAULT 3.14;
+--BEGIN
+--    vObwod := 2 * cPI * vPromien;
+--    vPole := cPi * vPromien * vPromien;
+--    DBMS_OUTPUT.PUT_LINE('Obwod kola o promieniu ' || vPromien || ': ' || vObwod);
+--    DBMS_OUTPUT.PUT_LINE('Pole kola o promieniu ' || vPromien || ': ' || vPole);
+--END;
+
+----zad5
+--DECLARE
+--    vNazwisko Pracownicy.nazwisko%TYPE;
+--    vEtat Pracownicy.etat%TYPE;
+--BEGIN
+--    SELECT nazwisko, etat
+--    INTO vNazwisko, vEtat
+--    FROM pracownicy
+--    WHERE placa_pod + COALESCE(placa_dod, 0) = (
+--            SELECT MAX(placa_pod + COALESCE(placa_dod, 0))
+--            FROM pracownicy
+--    );
+--    DBMS_OUTPUT.PUT_LINE('Najlepiej zarabia pracownik ' || vNazwisko);
+--    DBMS_OUTPUT.PUT_LINE('Pracuje on jako ' || vEtat) ;
+--END;
+
+----zad6
+--DECLARE
+--    TYPE tDane IS RECORD (
+--        nazwisko Pracownicy.nazwisko%TYPE,
+--        etat Pracownicy.etat%TYPE);
+--    vPracownik tDane;
+--BEGIN
+--    SELECT nazwisko, etat
+--    INTO vPracownik.nazwisko, vPracownik.etat
+--    FROM pracownicy
+--    WHERE placa_pod + COALESCE(placa_dod, 0) = (
+--            SELECT MAX(placa_pod + COALESCE(placa_dod, 0))
+--            FROM pracownicy
+--    );
+--    DBMS_OUTPUT.PUT_LINE('Najlepiej zarabia pracownik ' || vPracownik.nazwisko);
+--    DBMS_OUTPUT.PUT_LINE('Pracuje on jako ' || vPracownik.etat) ;
+--END;
+
+----zad7
+--DECLARE
+--    TYPE tPieniadze IS RECORD (
+--    rocznie NUMBER);
+--    vPieniadze tPieniadze;
+--BEGIN
+--    SELECT (placa_pod + COALESCE(placa_dod, 0)) * 12
+--    INTO vPieniadze.rocznie
+--    FROM pracownicy
+--    WHERE nazwisko = 'SLOWINSKI';
+--    DBMS_OUTPUT.PUT_LINE('Pracownik SLOWINSKI zarabia rocznie ' || vPieniadze.rocznie) ;
+--END;
+
+----zad8
+--DECLARE
+--    vSekunda NUMBER DEFAULT EXTRACT(SECOND FROM CURRENT_TIMESTAMP);
+--BEGIN
+--    WHILE vSekunda != 25 LOOP
+--        vSekunda := EXTRACT(SECOND FROM CURRENT_TIMESTAMP);
+--    END LOOP;
+--    DBMS_OUTPUT.PUT_LINE('Nadeszla 25 sekunda!');
+--END;
+
+----zad9
+--DECLARE
+--    vN NATURAL := 10;
+--    vSilnia NATURAL := 1;
+--BEGIN
+--    NULL;
+--    FOR vIndeks IN 1..vN LOOP
+--        vSilnia := vSilnia * vIndeks;
+--    END LOOP;
+--    DBMS_OUTPUT.PUT_LINE('Silnia dla n=' || vN || ': ' || vSilnia );
+--END;
+
+----zad10
+--DECLARE
+--    vDzien CHAR(20);
+--    vStart DATE := TO_DATE('01-01-2001', 'DD-MM-YYYY');
+--BEGIN
+--    WHILE TO_CHAR(vStart, 'DD-MM-YYYY') != '01-01-2101' LOOP
+--        SELECT TO_CHAR(vStart, 'DAY')
+--        INTO vDzien
+--        FROM dual;
+--        IF vDzien = 'PI¥TEK' AND EXTRACT(DAY FROM vSTART) = 13 THEN
+--            DBMS_OUTPUT.PUT_LINE(TO_CHAR(vStart, 'DD-MM-YYYY'));
+--        END IF;
+--        vStart := vStart + 1;
+--    END LOOP;
+--END;
