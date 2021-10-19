@@ -93,3 +93,40 @@ END;
 /
 
 --zad6
+CREATE OR REPLACE PROCEDURE RaportKadrowy IS
+    CURSOR cPokazEtaty IS
+        SELECT NAZWA 
+        FROM ETATY
+        ORDER BY NAZWA;
+    
+    CURSOR cPokazPracownikowEtatu(pEtat PRACOWNICY.ETAT%TYPE) IS
+        SELECT nazwisko, placa_pod + COALESCE(placa_dod, 0) as pensja
+        FROM PRACOWNICY
+        WHERE etat = pEtat
+        ORDER BY NAZWISKO;
+
+    CURSOR cPokazDaneEtatu(pEtat PRACOWNICY.ETAT%TYPE) IS
+        SELECT COUNT(nazwisko) as liczba_pracownikow, ROUND(AVG(placa_pod + COALESCE(placa_dod, 0)), 2) as srednia_pensja
+        FROM Pracownicy
+        WHERE etat = pEtat;
+        
+BEGIN
+    FOR vEtat IN cPokazEtaty LOOP
+        DBMS_OUTPUT.PUT_LINE('Etat: ' || vEtat.nazwa);
+        DBMS_OUTPUT.PUT_LINE('----------------------');
+        FOR vPracownik IN cPokazPracownikowEtatu(vEtat.nazwa) LOOP
+            DBMS_OUTPUT.PUT_LINE(cPokazPracownikowEtatu%ROWCOUNT || '. ' || vPracownik.nazwisko || ', pensja: ' || vPracownik.pensja);
+        END LOOP;
+
+        FOR vDane IN cPokazDaneEtatu(vEtat.nazwa) LOOP
+            DBMS_OUTPUT.PUT_LINE('Liczba pracownik: ' || vDane.liczba_pracownikow);
+            DBMS_OUTPUT.PUT_LINE('Średnia pensja: ' || vDane.srednia_pensja);
+        END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE(' ');
+    END LOOP;
+END RaportKadrowy;
+/
+BEGIN
+    RaportKadrowy;
+END;
