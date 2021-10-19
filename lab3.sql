@@ -57,12 +57,12 @@ BEGIN
     FOR vPracownik IN cPodwyzkaUsunStazystow LOOP
         IF vPracownik.nazwa = 'ALGORYTMY' THEN
             UPDATE PRACOWNICy
-            SET placa_dod = placa_dod + 100
+            SET placa_dod = COALESCE(placa_dod, 0) + 100
             WHERE CURRENT OF cPodwyzkaUsunStazystow;
         
         ELSIF vPracownik.nazwa = 'ADMINISTRACJA' THEN
             UPDATE PRACOWNICy
-            SET placa_dod = placa_dod + 150
+            SET placa_dod = COALESCE(placa_dod, 0) + 150
             WHERE CURRENT OF cPodwyzkaUsunStazystow;
 
         ELSIF vPracownik.etat = 'STAZYSTA' THEN
@@ -73,5 +73,23 @@ BEGIN
     END LOOP;
 END;
 /
-SELECT nazwisko, placa_dod, nazwa 
-from PRACOWNICY JOIN ZESPOLY using(id_zesp);
+
+--zad5
+CREATE OR REPLACE PROCEDURE PokazPracownikowEtatu
+    (pEtat PRACOWNICY.ETAT%TYPE) IS
+    CURSOR cPokazEtat IS
+        SELECT nazwisko FROM PRACOWNICY
+        WHERE etat = pEtat
+        ORDER BY nazwisko;
+BEGIN
+    FOR vPracownik IN cPokazEtat LOOP
+        DBMS_OUTPUT.PUT_LINE(vPracownik.nazwisko);
+    END LOOP;
+END PokazPracownikowEtatu;
+/
+BEGIN
+    PokazPracownikowEtatu('PROFESOR');
+END;
+/
+
+--zad6
