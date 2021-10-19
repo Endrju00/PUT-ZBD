@@ -129,3 +129,127 @@ END RaportKadrowy;
 BEGIN
     RaportKadrowy;
 END;
+/
+
+--zad7
+CREATE OR REPLACE PACKAGE IntZespoly IS
+    -- Package procedures
+    PROCEDURE AddTeam
+        (pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE);
+    
+    PROCEDURE DeleteTeamById
+        (pId ZESPOLY.ID_ZESP%TYPE);
+
+    PROCEDURE DeleteTeamByName
+        (pName ZESPOLY.NAZWA%TYPE);
+    
+    PROCEDURE ModifyTeamData
+        (pId ZESPOLY.ID_ZESP%TYPE,
+            pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE);
+
+    -- Package functions
+    FUNCTION GetTeamId
+        (pName ZESPOLY.NAZWA%TYPE)
+        RETURN ZESPOLY.ID_ZESP%TYPE;
+    
+    FUNCTION GetTeamName
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.NAZWA%TYPE;
+    
+    FUNCTION GetTeamAddress
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.ADRES%TYPE;
+
+END IntZespoly;
+/
+CREATE OR REPLACE PACKAGE BODY IntZespoly IS
+    -- Package procedures
+    PROCEDURE AddTeam
+        (pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE) IS
+    BEGIN
+        INSERT INTO ZESPOLY(id_zesp, nazwa, adres)
+        VALUES(
+            (SELECT MAX(id_zesp) + 10 FROM zespoly),
+            pName,
+            pAddress
+        );
+        IF SQL%FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Dodanych rekordów: '|| SQL%ROWCOUNT);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE ('Nie wstawiono żadnego rekordu!');
+        END IF;
+    END AddTeam;
+    
+    PROCEDURE DeleteTeamById
+        (pId ZESPOLY.ID_ZESP%TYPE) IS
+    BEGIN
+        DELETE FROM ZESPOLY WHERE id_zesp = pId;
+        IF SQL%FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Usuniętych rekordów: '|| SQL%ROWCOUNT);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE ('Usunięcie rekordu zakończyło się niepowodzeniem.');
+        END IF;
+    END DeleteTeamById;
+
+    PROCEDURE DeleteTeamByName
+        (pName ZESPOLY.NAZWA%TYPE) IS
+    BEGIN
+        DELETE FROM ZESPOLY WHERE nazwa = pName;
+    END DeleteTeamByName;
+    
+    PROCEDURE ModifyTeamData
+        (pId ZESPOLY.ID_ZESP%TYPE,
+            pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE) IS
+    BEGIN
+        UPDATE ZESPOLY
+        SET nazwa = pName, adres = pAddress
+        WHERE id_zesp = pId;
+        IF SQL%FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Zmienionych rekordów: '|| SQL%ROWCOUNT);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE ('Nie udało się zmienić żadnego rekordu!');
+        END IF;
+    END ModifyTeamData;
+
+    -- Package functions
+    FUNCTION GetTeamId
+        (pName ZESPOLY.NAZWA%TYPE)
+        RETURN ZESPOLY.ID_ZESP%TYPE IS
+        vId ZESPOLY.ID_ZESP%TYPE;
+    BEGIN
+        SELECT id_zesp 
+        INTO vId
+        FROM ZESPOLY
+        WHERE nazwa = pName;
+        RETURN vId;
+    END GetTeamId;
+    
+    FUNCTION GetTeamName
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.NAZWA%TYPE IS
+        vName ZESPOLY.NAZWA%TYPE;
+    BEGIN
+        SELECT nazwa
+        INTO vName
+        FROM ZESPOLY
+        WHERE id_zesp = pId;
+        RETURN vName;
+    END GetTeamName;
+    
+    FUNCTION GetTeamAddress
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.ADRES%TYPE IS
+        vAddress ZESPOLY.ADRES%TYPE;
+    BEGIN
+        SELECT adres
+        INTO vAddress
+        FROM ZESPOLY
+        WHERE id_zesp = pId;
+        RETURN vAddress;
+    END GetTeamAddress;
+END IntZespoly;
+/
