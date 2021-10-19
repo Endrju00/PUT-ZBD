@@ -104,25 +104,24 @@ CREATE OR REPLACE PROCEDURE RaportKadrowy IS
         FROM PRACOWNICY
         WHERE etat = pEtat
         ORDER BY NAZWISKO;
-
-    CURSOR cPokazDaneEtatu(pEtat PRACOWNICY.ETAT%TYPE) IS
-        SELECT COUNT(nazwisko) as liczba_pracownikow, ROUND(AVG(placa_pod + COALESCE(placa_dod, 0)), 2) as srednia_pensja
-        FROM Pracownicy
-        WHERE etat = pEtat;
+    
+    vCounter NUMBER;
+    vAvg NUMBER DEFAULT 0;
         
 BEGIN
     FOR vEtat IN cPokazEtaty LOOP
+        vCounter := 0;
+        vAvg := 0;
         DBMS_OUTPUT.PUT_LINE('Etat: ' || vEtat.nazwa);
         DBMS_OUTPUT.PUT_LINE('----------------------');
         FOR vPracownik IN cPokazPracownikowEtatu(vEtat.nazwa) LOOP
             DBMS_OUTPUT.PUT_LINE(cPokazPracownikowEtatu%ROWCOUNT || '. ' || vPracownik.nazwisko || ', pensja: ' || vPracownik.pensja);
+            vCounter := vCounter + 1;
+            vAvg := vAvg + vPracownik.pensja;
         END LOOP;
-
-        FOR vDane IN cPokazDaneEtatu(vEtat.nazwa) LOOP
-            DBMS_OUTPUT.PUT_LINE('Liczba pracownik: ' || vDane.liczba_pracownikow);
-            DBMS_OUTPUT.PUT_LINE('Średnia pensja: ' || vDane.srednia_pensja);
-        END LOOP;
-
+        vAvg := ROUND(vAvg/vCounter, 2);
+        DBMS_OUTPUT.PUT_LINE('Liczba pracownikow: ' || vCounter);
+        DBMS_OUTPUT.PUT_LINE('Średnia płaca na etacie: ' || vAvg);
         DBMS_OUTPUT.PUT_LINE(' ');
     END LOOP;
 END RaportKadrowy;
