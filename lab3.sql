@@ -253,3 +253,221 @@ CREATE OR REPLACE PACKAGE BODY IntZespoly IS
     END GetTeamAddress;
 END IntZespoly;
 /
+
+--przykłady w skrypcie
+CREATE OR REPLACE PROCEDURE Kara(pNazwisko IN VARCHAR, pKwotaKary IN NUMBER) IS
+ vPlacaPod Pracownicy.placa_pod%TYPE;
+ vRowid ROWID;
+BEGIN
+    SELECT placa_pod, ROWID INTO vPlacaPod, vRowid
+    FROM Pracownicy
+    WHERE nazwisko = pNazwisko;
+
+    IF vPlacaPod - pKwotaKary <= 100 THEN
+        RAISE_APPLICATION_ERROR(-20001,
+        'Zarobki pracownika muszą przekraczać 100. Operacja anulowana.');
+    ELSE
+        UPDATE Pracownicy
+        SET placa_pod = placa_pod - pKwotaKary
+        WHERE ROWID = vRowid;
+END IF;
+END Kara;
+/
+BEGIN
+    Kara('MAREK', 500);
+END;
+/
+CREATE OR REPLACE PROCEDURE UsunZespol(pIdZesp IN NUMBER) IS
+    vIluPracownikow NUMBER;
+    exPracownicyWZespole EXCEPTION;
+BEGIN
+    SELECT COUNT(*) INTO vIluPracownikow
+    FROM Pracownicy WHERE id_zesp = pIdZesp;
+    IF (vIluPracownikow > 0) THEN
+        RAISE exPracownicyWZespole;
+    END IF;
+    DELETE FROM zespoly
+    WHERE id_zesp = pIdZesp;
+    DBMS_OUTPUT.PUT_LINE('Zespół został usunięty!');
+EXCEPTION
+    WHEN exPracownicyWZespole THEN
+        DBMS_OUTPUT.PUT_LINE('Do zespołu są przypisani pracownicy. ' ||
+        'Usunięcie anulowane!');
+END UsunZespol;
+/
+BEGIN
+    UsunZespol(10);
+END;
+/
+
+--zad8
+CREATE OR REPLACE PACKAGE IntZespoly IS
+    -- Package procedures
+    PROCEDURE AddTeam
+        (pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE);
+    
+    PROCEDURE DeleteTeamById
+        (pId ZESPOLY.ID_ZESP%TYPE);
+
+    PROCEDURE DeleteTeamByName
+        (pName ZESPOLY.NAZWA%TYPE);
+    
+    PROCEDURE ModifyTeamData
+        (pId ZESPOLY.ID_ZESP%TYPE,
+            pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE);
+
+    -- Package functions
+    FUNCTION GetTeamId
+        (pName ZESPOLY.NAZWA%TYPE)
+        RETURN ZESPOLY.ID_ZESP%TYPE;
+    
+    FUNCTION GetTeamName
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.NAZWA%TYPE;
+    
+    FUNCTION GetTeamAddress
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.ADRES%TYPE;
+
+    exNiepoprawnyZespol EXCEPTION;
+    exNiepoprawnyIdentyfikator EXCEPTION;
+    exPowielenieIdentyfikatora EXCEPTION;
+
+END IntZespoly;
+/
+CREATE OR REPLACE PACKAGE BODY IntZespoly IS
+    -- Package procedures
+    PROCEDURE AddTeam
+        (pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE) IS
+    BEGIN
+        INSERT INTO ZESPOLY(id_zesp, nazwa, adres)
+        VALUES(
+            (SELECT MAX(id_zesp) + 10 FROM zespoly),
+            pName,
+            pAddress
+        );
+        IF SQL%FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Dodanych rekordów: '|| SQL%ROWCOUNT);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE ('Nie wstawiono żadnego rekordu!');
+        END IF;
+    END AddTeam;
+    
+    PROCEDURE DeleteTeamById
+        (pId ZESPOLY.ID_ZESP%TYPE) IS
+        vId ZESPOLY.ID_ZESP%TYPE;
+    BEGIN
+        SELECT id_zesp INTO vId
+        FROM ZESPOLY WHERE id_zesp = vId;
+
+        DELETE FROM ZESPOLY WHERE id_zesp = vId;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyIdentyfikator;
+
+    END DeleteTeamById;
+
+    PROCEDURE DeleteTeamByName
+        (pName ZESPOLY.NAZWA%TYPE) IS
+        vNazwa ZESPOLY.NAZWA%TYPE;
+    BEGIN
+        SELECT nazwa INTO vNazwa
+        FROM ZESPOLY WHERE nazwa = pName;
+
+        DELETE FROM ZESPOLY WHERE nazwa = vNazwa;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyZespol;
+
+    END DeleteTeamByName;
+    
+    PROCEDURE ModifyTeamData
+        (pId ZESPOLY.ID_ZESP%TYPE,
+            pName ZESPOLY.NAZWA%TYPE,
+            pAddress ZESPOLY.ADRES%TYPE) IS
+        vId ZESPOLY.ID_ZESP%TYPE;
+    BEGIN
+        SELECT id_zesp INTO vId
+        FROM ZESPOLY WHERE id_zesp = vId;
+
+        UPDATE ZESPOLY
+        SET nazwa = pName, adres = pAddress
+        WHERE id_zesp = vId;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyIdentyfikator;
+    END ModifyTeamData;
+
+    -- Package functions
+    FUNCTION GetTeamId
+        (pName ZESPOLY.NAZWA%TYPE)
+        RETURN ZESPOLY.ID_ZESP%TYPE IS
+        vId ZESPOLY.ID_ZESP%TYPE;
+    BEGIN
+        SELECT id_zesp 
+        INTO vId
+        FROM ZESPOLY
+        WHERE nazwa = pName;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyZespol;
+
+        RETURN vId;
+    END GetTeamId;
+    
+    FUNCTION GetTeamName
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.NAZWA%TYPE IS
+        vName ZESPOLY.NAZWA%TYPE;
+    BEGIN
+        SELECT nazwa
+        INTO vName
+        FROM ZESPOLY
+        WHERE id_zesp = pId;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyIdentyfikator;
+
+        RETURN vName;
+    END GetTeamName;
+    
+    FUNCTION GetTeamAddress
+        (pId ZESPOLY.ID_ZESP%TYPE)
+        RETURN ZESPOLY.ADRES%TYPE IS
+        vAddress ZESPOLY.ADRES%TYPE;
+    BEGIN
+        SELECT adres
+        INTO vAddress
+        FROM ZESPOLY
+        WHERE id_zesp = pId;
+
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE exNiepoprawnyIdentyfikator;
+
+        RETURN vAddress;
+    END GetTeamAddress;
+END IntZespoly;
+/
+DECLARE
+    vId PRACOWNICY.ID_PRAC%TYPE;
+BEGIN
+    INTZESPOLY.MODIFYTEAMDATA(PID  => 123 /*IN NUMBER(4)*/,
+                              PNAME  => 'test' /*IN VARCHAR2*/,
+                              PADDRESS  => 'test'/*IN VARCHAR2*/);
+
+    EXCEPTION
+        WHEN INTZESPOLY.exNiepoprawnyZespol THEN
+            DBMS_OUTPUT.PUT_LINE('Podano nazwe nieistniejącego zespołu!');
+        
+        WHEN INTZESPOLY.exNiepoprawnyIdentyfikator THEN
+            DBMS_OUTPUT.PUT_LINE('Podano identyfikator nieistniejącego zespołu!');
+END;
