@@ -466,8 +466,8 @@ BEGIN
 
     EXCEPTION
         WHEN INTZESPOLY.exNiepoprawnyZespol THEN
-            DBMS_OUTPUT.PUT_LINE('Podano nazwe nieistniejącego zespołu!');
+            RAISE_APPLICATION_ERROR(-20001, 'Podano nazwe nieistniejącego zespołu!');
         
         WHEN INTZESPOLY.exNiepoprawnyIdentyfikator THEN
-            DBMS_OUTPUT.PUT_LINE('Podano identyfikator nieistniejącego zespołu!');
+            RAISE_APPLICATION_ERROR(-20000, 'Podano nazwe nieistniejącego zespołu!');
 END;
