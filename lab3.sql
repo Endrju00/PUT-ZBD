@@ -469,5 +469,5 @@ BEGIN
             RAISE_APPLICATION_ERROR(-20001, 'Podano nazwe nieistniejącego zespołu!');
         
         WHEN INTZESPOLY.exNiepoprawnyIdentyfikator THEN
-            RAISE_APPLICATION_ERROR(-20000, 'Podano nazwe nieistniejącego zespołu!');
+            RAISE_APPLICATION_ERROR(-20000, 'Podano identyfikator nieistniejącego zespołu!');
 END;
