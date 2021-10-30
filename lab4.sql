@@ -276,6 +276,28 @@ CREATE OR REPLACE TRIGGER Usun_Prac
         DBMS_OUTPUT.PUT_LINE(:OLD.nazwisko);
     END;
 -- wyzwalacz z AFTER najpierw wypisze nazwiska podwladnych a poniej szefa a BEFORE na odwrót
-/
+
 
 --zad8
+ALTER TABLE PRACOWNICY DISABLE ALL TRIGGERS;
+
+SELECT trigger_name, status, table_name
+FROM User_Triggers;
+
+--zad9
+SELECT trigger_name, status, table_name
+FROM User_Triggers
+WHERE table_name IN ('PRACOWNICY', 'ZESPOLY') 
+ORDER BY table_name, trigger_name;
+/
+DECLARE
+    vDDL VARCHAR(60);
+    CURSOR cTriggers IS
+        SELECT TRIGGER_NAME FROM USER_TRIGGERS
+        WHERE TABLE_NAME IN ('PRACOWNICY', 'ZESPOLY');
+BEGIN
+    FOR vTrigger IN cTriggers LOOP
+        vDDL := 'DROP TRIGGER ' || vTrigger.trigger_name;
+        EXECUTE IMMEDIATE (vDDL);
+    END LOOP;
+END;
