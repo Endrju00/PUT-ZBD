@@ -1,4 +1,5 @@
 SET SERVEROUTPUT ON;
+SET AUTOCOMMIT OFF;
 
 CREATE TRIGGER PoPoleceniu
     AFTER UPDATE ON PRACOWNICY
@@ -144,5 +145,61 @@ BEGIN
 END;
 /
 INSERT INTO ZESPOLY(nazwa, adres) VALUES('NOWY', 'brak');
+
+/
+CREATE OR REPLACE VIEW StatystykiZespolow(id_zesp, nazwa, liczba_pracownikow) AS
+SELECT id_zesp, nazwa, COUNT(id_prac)
+FROM ZESPOLY LEFT JOIN PRACOWNICY USING(ID_ZESP)
+GROUP BY id_zesp, nazwa
+/
+CREATE TRIGGER ZamiastInsert
+    INSTEAD OF INSERT ON StatystykiZespolow
+BEGIN
+    INSERT INTO ZESPOLY(id_zesp, nazwa)
+    VALUES(:NEW.id_zesp, :NEW.nazwa);
+END;
+/
+INSERT INTO StatystykiZespolow(id_zesp, nazwa,liczba_pracownikow)
+VALUES(99, 'NOWY ZESPÓŁ', 0);
+/
+
+--zad5
+CREATE OR REPLACE VIEW Szefowie(szef, pracownicy) AS
+SELECT s.nazwisko, COUNT(p.id_prac)
+FROM PRACOWNICY s INNER JOIN PRACOWNICY p ON s.id_prac = p.id_szefa
+GROUP BY s.nazwisko;
+/
+SELECT * FROM Szefowie;
+/
+CREATE OR REPLACE TRIGGER UsunSzefa
+INSTEAD OF DELETE ON Szefowie
+DECLARE
+    vIdSzefa PRACOWNICY.ID_PRAC%TYPE;
+    CURSOR cPodwladniSzefa(pIdSzefa PRACOWNICY.ID_PRAC%TYPE) IS
+        SELECT id_prac FROM PRACOWNICY
+        WHERE ID_SZEFA = pIdSzefa;
+    vLiczbaPodwladnych NUMBER;
+BEGIN
+    SELECT ID_PRAC INTO vIdSzefa
+    FROM PRACOWNICY WHERE NAZWISKO = :OLD.szef;
+
+    FOR vPodwladny IN cPodwladniSzefa(vIdSzefa) LOOP
+        SELECT COUNT(*) INTO vLiczbaPodwladnych
+        FROM PRACOWNICY WHERE ID_SZEFA = vPodwladny.id_prac;
+
+        IF vLiczbaPodwladnych > 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Jeden z podwładnych usuwanego pracownika jest szefem innnych pracowników. Usuwanie anulowane!');
+        ELSE
+            DELETE FROM PRACOWNICY WHERE ID_PRAC = vPodwladny.id_prac;
+        END IF;
+    END LOOP;
+    DELETE FROM PRACOWNICY WHERE NAZWISKO = :OLD.szef;
+END;
+/
+
+SELECT * FROM szefowie;
+DELETE FROM SZEFOWIE WHERE szef = 'MORZY';
+ROLLBACK;
+
 
 
