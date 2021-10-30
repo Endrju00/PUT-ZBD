@@ -201,5 +201,81 @@ SELECT * FROM szefowie;
 DELETE FROM SZEFOWIE WHERE szef = 'MORZY';
 ROLLBACK;
 
+/
+CREATE OR REPLACE TRIGGER PoUsunieciu
+    AFTER DELETE ON PRACOWNICY
+    FOR EACH ROW
+DECLARE
+    vLiczba PLS_INTEGER;
+BEGIN
+    SELECT COUNT(*) INTO vLiczba
+    FROM PRACOWNICY;
 
+    DBMS_OUTPUT.PUT_LINE('Pracowników po DELETE: ' || vLiczba);
+END;
+/
+DELETE FROM PRACOWNICY WHERE nazwisko = 'HAPKE';
 
+--zad6
+ALTER TABLE ZESPOLY ADD LICZBA_PRACOWNIKOW NUMBER;
+UPDATE ZESPOLY z
+SET LICZBA_PRACOWNIKOW = (
+        SELECT COUNT(p.id_prac) 
+        FROM ZESPOLY zz LEFT JOIN PRACOWNICY p ON zz.id_zesp = p.id_zesp 
+        WHERE zz.id_zesp = z.id_zesp
+);
+SELECT * FROM ZESPOLY;
+/
+CREATE OR REPLACE TRIGGER Pielegnuj
+    AFTER INSERT OR DELETE OR UPDATE OF id_zesp ON PRACOWNICY
+    FOR EACH ROW
+BEGIN
+    CASE
+        WHEN DELETING THEN
+            UPDATE ZESPOLY
+            SET LICZBA_PRACOWNIKOW = LICZBA_PRACOWNIKOW - 1
+            WHERE id_zesp = :OLD.id_zesp;
+        
+        WHEN UPDATING THEN
+            UPDATE ZESPOLY
+            SET LICZBA_PRACOWNIKOW = LICZBA_PRACOWNIKOW - 1
+            WHERE id_zesp = :OLD.id_zesp;
+
+            UPDATE ZESPOLY
+            SET LICZBA_PRACOWNIKOW = LICZBA_PRACOWNIKOW + 1
+            WHERE id_zesp = :NEW.id_zesp;
+        
+        WHEN INSERTING THEN
+            UPDATE ZESPOLY
+            SET LICZBA_PRACOWNIKOW = LICZBA_PRACOWNIKOW + 1
+            WHERE id_zesp = :NEW.id_zesp;
+    END CASE;
+END;
+/
+INSERT INTO PRACOWNICY(id_prac, nazwisko, id_zesp, id_szefa)
+VALUES(300, 'NOWY PRACOWNIK', 40, 120);
+/
+
+--zad7
+ALTER TABLE PRACOWNICY DROP CONSTRAINT FK_ID_SZEFA;
+ALTER TABLE PRACOWNICY ADD CONSTRAINT FK_ID_SZEFA FOREIGN KEY (id_szefa) REFERENCES pracownicy(id_prac) ON DELETE CASCADE;
+
+CREATE OR REPLACE TRIGGER Usun_Prac
+    AFTER DELETE ON PRACOWNICY
+    FOR EACH ROW
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(:OLD.nazwisko);
+    END;
+/
+DELETE FROM PRACOWNICY WHERE NAZWISKO = 'MORZY';
+/
+CREATE OR REPLACE TRIGGER Usun_Prac
+    BEFORE DELETE ON PRACOWNICY
+    FOR EACH ROW
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(:OLD.nazwisko);
+    END;
+-- wyzwalacz z AFTER najpierw wypisze nazwiska podwladnych a poniej szefa a BEFORE na odwrót
+/
+
+--zad8
