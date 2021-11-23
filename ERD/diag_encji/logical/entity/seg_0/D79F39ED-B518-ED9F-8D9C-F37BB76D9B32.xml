@@ -1,0 +1,93 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D79F39ED-B518-ED9F-8D9C-F37BB76D9B32" name="Płatność">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:11:05 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Płatności</preferredAbbreviation>
+<shortName>Pł</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Data" id="7D2C443D-AE4D-EDFE-1A61-450A62A8A29C">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:13:54 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kwota" id="8A6754E6-42FB-BF56-ECAC-FA5BD256DE29">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:13:25 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,10,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Numer" id="458935FB-16A9-287C-69D9-44FB5D048A16">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:11:58 UTC</createdTime>
+<generatorID>BBF156EE-03E0-39EA-E46E-E68A5FD3175A</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>E76457C5-D347-1D65-99FB-67312AE46273</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id" id="9F21367B-A8EC-1CE4-F436-BED672B5AB3E">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:12:52 UTC</createdTime>
+<generatorID>BBF156EE-03E0-39EA-E46E-E68A5FD3175A</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>93B18F4B-4432-58F2-1ACD-800E7426E2F5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="74967B8F-3692-4F22-32C3-33D75D9485B0" name="Płatność PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:11:58 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>458935FB-16A9-287C-69D9-44FB5D048A16</attributeRef>
+<attributeRef>9F21367B-A8EC-1CE4-F436-BED672B5AB3E</attributeRef>
+<attributeRef>7D2C443D-AE4D-EDFE-1A61-450A62A8A29C</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

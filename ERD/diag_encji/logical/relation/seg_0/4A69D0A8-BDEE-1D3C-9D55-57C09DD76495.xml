@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Stanowisko_Pracownik" directorySegmentName="seg_0" id="4A69D0A8-BDEE-1D3C-9D55-57C09DD76495">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:43:43 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<sourcePk>4196B216-214F-7CEE-36B3-2E9389A26884</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>obejmuje</nameOnSource>
+<nameOnTarget>zajmuje</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BB609CE1-E8E6-2C21-535B-50ADAECF2FCA</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9E22D3FD-B492-2522-99C3-D107C6A5C7D0</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9E22D3FD-B492-2522-99C3-D107C6A5C7D0" name="Pracownik">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:25:44 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>82B8940E-F704-D1EC-C747-2D996497F99D</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Pracownicy</preferredAbbreviation>
+<shortName>Pr</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Nazwa" id="28352458-4B9D-009F-4830-86B519C904D4">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:57:43 UTC</createdTime>
+<generatorID>4A69D0A8-BDEE-1D3C-9D55-57C09DD76495</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>4FFA8CB7-B64C-F154-D2A9-82E77EF158C4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Placa" id="A5B77FE5-7EB4-440B-219B-818DECF9104A">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:58:54 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,10,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Ilość_godzin_tyg" id="5BD025D8-F789-4306-D58D-F747BAEA5D91">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:59:12 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

@@ -1,0 +1,116 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DFFC917B-5EB5-BC65-5D7D-87F995555EC9" name="Dostawa">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:47:08 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Dostawy</preferredAbbreviation>
+<shortName>Dos</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Data" id="5BEC8226-882F-F8A8-07AF-112C58C99868">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:49:09 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Ilość" id="E610B479-C136-58F8-DDA4-6D330A78BEF1">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:49:45 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Cena_jednostkowa_zakupu" id="D9A8EBC8-0158-7F5C-0F1F-EE081F115278">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:50:36 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,10,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Cena_jednostkowa_sprzedazy" id="20BFF053-BCD7-F1C5-C1B6-88735972F205">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 20:52:21 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kod" id="57401D8B-E1FC-013A-B1A9-637A7B752E28">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:47:32 UTC</createdTime>
+<generatorID>158BFDD9-2B1F-1D6C-18DF-B26BA00D5C03</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>6050972E-6AA5-EA46-7F00-C0E0D2281D81</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa" id="8B083FA5-1933-F281-1048-1F42A6B9F338">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:47:44 UTC</createdTime>
+<generatorID>84C653B9-C2D8-D21B-4431-7E5AFB83A7BD</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>DDF90585-91A8-6779-2DB3-EC23DF10A13B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="62C3861B-F6DB-B989-E432-47D5E505D51E" name="Zakup PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:47:32 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>57401D8B-E1FC-013A-B1A9-637A7B752E28</attributeRef>
+<attributeRef>8B083FA5-1933-F281-1048-1F42A6B9F338</attributeRef>
+<attributeRef>5BEC8226-882F-F8A8-07AF-112C58C99868</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

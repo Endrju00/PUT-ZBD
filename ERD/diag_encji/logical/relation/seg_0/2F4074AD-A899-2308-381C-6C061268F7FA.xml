@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Dostawa_Pozycja" directorySegmentName="seg_0" id="2F4074AD-A899-2308-381C-6C061268F7FA">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 20:49:50 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<sourcePk>62C3861B-F6DB-B989-E432-47D5E505D51E</sourcePk>
+<identifying>true</identifying>
+<nameOnSource>znajduje się na</nameOnSource>
+<nameOnTarget>dotyczy</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>DFFC917B-5EB5-BC65-5D7D-87F995555EC9</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>0B2D0A1C-E9A9-C273-6BAD-D51752DD8AB1</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

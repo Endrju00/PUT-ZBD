@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="117B5C09-7130-9CBA-DC18-E076BDFA4A3C" name="Kategoria">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:35:07 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Kategorie</preferredAbbreviation>
+<shortName>Kat</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Nazwa" id="DE5B031A-2B5C-57B0-5F89-8941E182F4D6">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:44:15 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa1" id="76AA1305-E982-9070-4969-B842A2793BE1">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 20:43:26 UTC</createdTime>
+<generatorID>47A8E852-A3AD-C5DD-CA19-E2BE88A58700</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>DE5B031A-2B5C-57B0-5F89-8941E182F4D6</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="34D5A4BE-58CA-414B-46C9-DC148D6D8A30" name="Rodzaj_produktu PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:44:27 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>DE5B031A-2B5C-57B0-5F89-8941E182F4D6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

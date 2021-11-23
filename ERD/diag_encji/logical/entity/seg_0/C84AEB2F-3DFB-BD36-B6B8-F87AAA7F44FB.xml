@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="C84AEB2F-3DFB-BD36-B6B8-F87AAA7F44FB" name="Produkt">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:13:44 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Produkty</preferredAbbreviation>
+<shortName>Pr</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Kod" id="6050972E-6AA5-EA46-7F00-C0E0D2281D81">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:16:04 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa" id="B47D8B5C-DCA5-F4F5-8F97-2C2DD8BBCFA8">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:16:41 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Opis" id="CCD1385E-7639-E118-9D02-0B5AE19503EE">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:17:37 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa1" id="A2547372-45E7-A6AC-E25C-457BFE52C7BA">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:29:57 UTC</createdTime>
+<generatorID>F726FDAF-AC15-3537-7356-A42E85B70D2C</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>6F33AA75-7D50-76E0-529A-36672E25DE82</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa2" id="8A6BE96D-8DB3-75C0-769E-B80AE3F3C48B">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:44:49 UTC</createdTime>
+<generatorID>751A0971-2738-EC19-FF95-A51A37A628FA</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>DE5B031A-2B5C-57B0-5F89-8941E182F4D6</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="8B6A5EFC-704E-81F7-348E-315AD3C73E66" name="Produkt PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:16:37 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6050972E-6AA5-EA46-7F00-C0E0D2281D81</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

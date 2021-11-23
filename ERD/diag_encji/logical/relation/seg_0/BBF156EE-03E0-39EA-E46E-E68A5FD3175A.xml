@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Zamówienie_Płatność" directorySegmentName="seg_0" id="BBF156EE-03E0-39EA-E46E-E68A5FD3175A">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:11:58 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<sourcePk>A31E23F2-EF36-DB6E-2281-00C0B3F10CD5</sourcePk>
+<identifying>true</identifying>
+<nameOnSource>zawiera</nameOnSource>
+<nameOnTarget>dotyczy</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>3306BA95-C0F4-98CF-80BC-8DC5A9EB1C69</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D79F39ED-B518-ED9F-8D9C-F37BB76D9B32</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,178 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3306BA95-C0F4-98CF-80BC-8DC5A9EB1C69" name="Zamówienie">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:24:53 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Zamówienia</preferredAbbreviation>
+<shortName>Zam</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Numer" id="E76457C5-D347-1D65-99FB-67312AE46273">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:37:37 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Data_złożenia" id="8C6B79C4-4497-B06C-4E4C-B1CA70DD2A4F">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:51:52 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Status" id="14DBFB0D-DC4C-1075-A019-9C8D62DD3C12">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:52:16 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id" id="93B18F4B-4432-58F2-1ACD-800E7426E2F5">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:12:52 UTC</createdTime>
+<generatorID>39CBAD5B-39E5-2B72-2B9F-F71500BBA9D0</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>97A38603-7F1A-BA93-FA58-B9F1EB2B94A5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Komentarz" id="681F004F-E94E-02F5-BA65-3DC5A9490021">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:17:37 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Miasto" id="0AF80FBF-19A7-FCAA-F61F-26C537337F33">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:37 UTC</createdTime>
+<generatorID>D6DF000E-608F-42CD-8CE9-A40A15193451</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>756C890C-514E-6EC7-FBA2-6E5BB54D1DC3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Ulica" id="FE87A80D-CB9F-D4D4-BAE8-476BD675F82E">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:37 UTC</createdTime>
+<generatorID>D6DF000E-608F-42CD-8CE9-A40A15193451</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>40CA33E9-73C8-F72A-5E6E-606166676D10</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kod_pocztowy" id="18835A45-43EA-B007-C6D3-5FDBE1F86C0D">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:37 UTC</createdTime>
+<generatorID>D6DF000E-608F-42CD-8CE9-A40A15193451</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>544EA297-CD6D-6CC7-A2B1-52B414E60D68</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>6</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nr_ulicy" id="278B3836-DCD3-541D-67FF-33C12780F6A5">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:37 UTC</createdTime>
+<generatorID>D6DF000E-608F-42CD-8CE9-A40A15193451</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>FD457937-FDEF-F8DA-A67E-205F0E9B0E2B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kraj" id="A86DC768-A249-BB70-9B5C-7E667726DB3A">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:37 UTC</createdTime>
+<generatorID>D6DF000E-608F-42CD-8CE9-A40A15193451</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>90D1DE19-42B5-FCC1-62FE-351A8BEE1CFB</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A31E23F2-EF36-DB6E-2281-00C0B3F10CD5" name="Zamówienie PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 10:38:20 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E76457C5-D347-1D65-99FB-67312AE46273</attributeRef>
+<attributeRef>93B18F4B-4432-58F2-1ACD-800E7426E2F5</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

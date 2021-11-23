@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F618263A-D398-57C7-A78F-22C5FDEB45DF" name="Adres">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:28:50 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<preferredAbbreviation>Adresy</preferredAbbreviation>
+<shortName>Adr</shortName>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Miasto" id="756C890C-514E-6EC7-FBA2-6E5BB54D1DC3">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:29:34 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Ulica" id="40CA33E9-73C8-F72A-5E6E-606166676D10">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:29:58 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nr_ulicy" id="FD457937-FDEF-F8DA-A67E-205F0E9B0E2B">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:30:14 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kod_pocztowy" id="544EA297-CD6D-6CC7-A2B1-52B414E60D68">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:30:33 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>6</dataTypeSize>
+<ownDataTypeParameters>6,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Kraj" id="90D1DE19-42B5-FCC1-62FE-351A8BEE1CFB">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:32:05 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="73908B07-CF77-1514-5936-BB8E167A333E" name="Adres PK">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-23 11:29:55 UTC</createdTime>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>756C890C-514E-6EC7-FBA2-6E5BB54D1DC3</attributeRef>
+<attributeRef>40CA33E9-73C8-F72A-5E6E-606166676D10</attributeRef>
+<attributeRef>544EA297-CD6D-6CC7-A2B1-52B414E60D68</attributeRef>
+<attributeRef>FD457937-FDEF-F8DA-A67E-205F0E9B0E2B</attributeRef>
+<attributeRef>90D1DE19-42B5-FCC1-62FE-351A8BEE1CFB</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
