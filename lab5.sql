@@ -68,7 +68,42 @@ select role, owner, table_name, column_name, privilege
 from role_tab_privs;
 
 --zad12
-SELECT * FROM INF145221.PRACOWNICY;
+SELECT * FROM INF145221.PRACOWNICY; 
 
+SELECT * FROM PRACOWNICY;
 
+REVOKE ROLA_145358 FROM INF145221;
 
+--zad18
+REVOKE UPDATE ON PRACOWNICY FROM ROLA_145358;
+
+--zad19
+DROP ROLE ROLA_145358;
+
+--zad20
+GRANT SELECT ON INF145221.PRACOWNICY TO INF139949;
+
+--zad21
+SELECT * FROM user_tab_privs_made;
+
+--zad23
+UPDATE INF145221.pracownicy
+SET placa_pod = 1000;
+
+--zad25
+SELECT INF145221.funLiczEtaty from dual;
+SELECT * FROM ETATY;
+
+--zad26
+CREATE TABLE test2 (
+    id NUMBER(2),
+    tekst VARCHAR2(20)
+);
+
+INSERT INTO test2
+VALUES(1, 'pierwszy');
+
+INSERT INTO test2
+VALUES(2, 'drugi');
+
+CREATE PROCEDURE procPokaztest
