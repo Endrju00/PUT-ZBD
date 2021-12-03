@@ -36,8 +36,8 @@ public class Lab_JDBC {
             System.exit(-1);
         }
 
-        zatrudnienieInfo(conn);
-
+//        zatrudnienieInfo(conn);
+            sprawdzAsystentow(conn);
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -66,6 +66,42 @@ public class Lab_JDBC {
             }
         } catch(SQLException ex) {
             System.out.println("Błąd wykonania polecenia: "+ ex.getMessage());
+        }
+    }
+
+    // Zadanie 3
+    private static void sprawdzAsystentow(Connection conn) {
+        try(Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery(
+                    "select nazwisko, placa_pod+COALESCE(placa_dod, 0) as placa" +
+                            " from pracownicy where etat = 'ASYSTENT'" +
+                            "order by placa desc"
+            );
+        ) {
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+            }
+            rs.afterLast();
+            if (rs.previous()) {
+                System.out.println("Najmniej zarabia " +
+                        rs.getString(1) + ", zarabia " + rs.getInt(2));
+            }
+
+            rs.absolute(2);
+            if (rs.next()) {
+                System.out.println("Trzeci asystent to " + rs.getString(1) +
+                        ", zarabia " + rs.getInt(2));
+            }
+
+            rs.absolute(-3);
+            if(rs.next()) {
+                System.out.println("Przedostatni asystent to " + rs.getString(1) +
+                        ", zarabia " + rs.getInt(2));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
