@@ -19,7 +19,7 @@ public class Lab_JDBC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         Connection conn = null;
         String connectionString =
@@ -38,8 +38,9 @@ public class Lab_JDBC {
         }
 
 //        zatrudnienieInfo(conn);
-//            sprawdzAsystentow(conn);
-        zwolnieniaZatrudnienia(conn);
+//        sprawdzAsystentow(conn);
+//        zwolnieniaZatrudnienia(conn);
+        etatyTransakcje(conn);
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -106,6 +107,8 @@ public class Lab_JDBC {
             throwables.printStackTrace();
         }
     }
+
+    // Zadanie 3
     private static void zwolnieniaZatrudnienia(Connection conn) {
         int [] zwolnienia={150, 200, 230};
         String z = Arrays.toString(zwolnienia).replace('[', '(').replace(']', ')');
@@ -126,9 +129,65 @@ public class Lab_JDBC {
                         "select get_id.nextval, '" + zatrudnienia[i] + "' from dual");
             }
             System.out.println("Wstawiono " + zatrudniono + " krotek.");
-            
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    // Zadanie 4
+    public static void etatyTransakcje(Connection conn) {
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (Statement stmt1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+             Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_UPDATABLE);
+        ) {
+            ResultSet rs = stmt1.executeQuery("select * from etaty");
+            System.out.println("PRZED INSERTEM");
+            while (rs.next()) {
+                System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3));
+            }
+
+            int changes = stmt2.executeUpdate(
+              "insert into etaty(nazwa, placa_min, placa_max)" +
+                      "VALUES('DOKTOR', 1000, 2000)"
+            );
+
+            System.out.println("PO INSERCIE");
+            rs = stmt1.executeQuery("select * from etaty");
+            while (rs.next()) {
+                System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3));
+            }
+
+            conn.rollback();
+
+            System.out.println("WYCOFANO TRANSAKCJE");
+            rs = stmt1.executeQuery("select * from etaty");
+            while (rs.next()) {
+                System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3));
+            }
+
+            changes = stmt2.executeUpdate(
+                    "insert into etaty(nazwa, placa_min, placa_max)" +
+                            "VALUES('DOKTOR', 1000, 2000)"
+            );
+            conn.commit();
+
+            System.out.println("POTWIERDZONO TRANSAKCJE");
+            rs = stmt1.executeQuery("select * from etaty");
+            while (rs.next()) {
+                System.out.println(rs.getString(1) + " " + rs.getInt(2) + " " + rs.getInt(3));
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }
