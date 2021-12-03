@@ -6,6 +6,7 @@
 package lab_jdbc;
 
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,8 @@ public class Lab_JDBC {
         }
 
 //        zatrudnienieInfo(conn);
-            sprawdzAsystentow(conn);
+//            sprawdzAsystentow(conn);
+        zwolnieniaZatrudnienia(conn);
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -69,7 +71,7 @@ public class Lab_JDBC {
         }
     }
 
-    // Zadanie 3
+    // Zadanie 2
     private static void sprawdzAsystentow(Connection conn) {
         try(Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
@@ -100,6 +102,31 @@ public class Lab_JDBC {
                         ", zarabia " + rs.getInt(2));
             }
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    private static void zwolnieniaZatrudnienia(Connection conn) {
+        int [] zwolnienia={150, 200, 230};
+        String z = Arrays.toString(zwolnienia).replace('[', '(').replace(']', ')');
+        String [] zatrudnienia={"Kandefer", "Rygiel", "Boczar"};
+
+        try (Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
+        ) {
+            int changes = stmt.executeUpdate(
+                    "delete from pracownicy where id_prac in " + z
+            );
+            System.out.println("Usunieto " + changes + " krotek.");
+
+            int zatrudniono = 0;
+            for (int i = 0; i < zatrudnienia.length; i++) {
+                zatrudniono += stmt.executeUpdate("INSERT INTO " +
+                        "pracownicy(id_prac,nazwisko) " +
+                        "select get_id.nextval, '" + zatrudnienia[i] + "' from dual");
+            }
+            System.out.println("Wstawiono " + zatrudniono + " krotek.");
+            
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
