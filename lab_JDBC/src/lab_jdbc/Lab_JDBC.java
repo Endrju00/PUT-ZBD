@@ -40,7 +40,8 @@ public class Lab_JDBC {
 //        zatrudnienieInfo(conn);
 //        sprawdzAsystentow(conn);
 //        zwolnieniaZatrudnienia(conn);
-        etatyTransakcje(conn);
+//        etatyTransakcje(conn);
+        prekompilowanePolecenia(conn);
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -188,6 +189,34 @@ public class Lab_JDBC {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
 
+    // Zadanie 5
+    private static void prekompilowanePolecenia(Connection conn) {
+        String [] nazwiska={"Woźniak", "Dąbrowski", "Kozłowski"};
+        int [] place={1300, 1700, 1500};
+        String []etaty={"ASYSTENT", "PROFESOR", "ADIUNKT"};
+
+        try (PreparedStatement pstmt = conn.prepareStatement(
+                "insert into pracownicy(id_prac, nazwisko, placa_pod, etat)" +
+                        "VALUES(?, ?, ?, ?)");
+             Statement stmt = conn.createStatement();
+        ) {
+            for (int i = 0; i < nazwiska.length; i++){
+                System.out.println(i);
+                ResultSet rs_id = stmt.executeQuery("select get_id.nextval from dual");
+                if (rs_id.next()) {
+                    pstmt.setInt(1, rs_id.getInt(1));
+                    pstmt.setString(2, nazwiska[i]);
+                    pstmt.setInt(3, place[i]);
+                    pstmt.setString(4, etaty[i]);
+                    int changes = pstmt.executeUpdate();
+                    System.out.println("Dodano " + changes + " pracownika " + nazwiska[i]);
+                }
+                rs_id.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
