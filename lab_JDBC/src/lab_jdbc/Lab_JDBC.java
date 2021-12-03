@@ -111,6 +111,22 @@ public class Lab_JDBC {
     }
 
     // Zadanie 3
+
+    //    SEKWENCJA
+    //    declare
+    //      ex number;
+    //    begin
+    //      select MAX(id_prac) + 10 into ex from PRACOWNICY;
+    //      If ex > 0 then
+    //            begin
+    //              execute immediate 'DROP SEQUENCE get_id';
+    //             exception when others then
+    //              null;
+    //            end;
+    //          execute immediate 'CREATE SEQUENCE get_id INCREMENT BY 10 START WITH ' || ex;
+    //      end if;
+    //    end;
+
     private static void zwolnieniaZatrudnienia(Connection conn) {
         int [] zwolnienia={150, 200, 230};
         String z = Arrays.toString(zwolnienia).replace('[', '(').replace(']', ')');
@@ -226,17 +242,17 @@ public class Lab_JDBC {
         try (Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);) {
 
-//            // Sekwencyjnie
-//            long start = System.nanoTime();
-//            int changes = stmt.executeUpdate(
-//                    "insert into pracownicy(id_prac, nazwisko) values(" + 2000 + ", 'testprac')");
-//            for (int i = 1; i < 2000; i++){
-//                changes += stmt.executeUpdate(
-//                        "insert into pracownicy(id_prac, nazwisko) values(" + (2000 + i) + ", 'testprac')");
-//            }
-//            System.out.println("Dokonano " + changes + " zmian.");
-//            long czas = System.nanoTime() - start;
-//            System.out.println("Czas sekwencyjnego wykonania: " + czas); // wynik: 43666181000
+    //            // Sekwencyjnie
+    //            long start = System.nanoTime();
+    //            int changes = stmt.executeUpdate(
+    //                    "insert into pracownicy(id_prac, nazwisko) values(" + 2000 + ", 'testprac')");
+    //            for (int i = 1; i < 2000; i++){
+    //                changes += stmt.executeUpdate(
+    //                        "insert into pracownicy(id_prac, nazwisko) values(" + (2000 + i) + ", 'testprac')");
+    //            }
+    //            System.out.println("Dokonano " + changes + " zmian.");
+    //            long czas = System.nanoTime() - start;
+    //            System.out.println("Czas sekwencyjnego wykonania: " + czas); // wynik: 43666181000
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -256,6 +272,46 @@ public class Lab_JDBC {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+    // Zadanie 7
+
+    //    FUNCKJA:
+    //    CREATE OR REPLACE FUNCTION LastName(
+    //        pID IN PRACOWNICY.ID_PRAC%TYPE,
+    //        pLastName OUT PRACOWNICY.NAZWISKO%TYPE
+    //    ) RETURN NUMBER IS
+    //    vReturn NUMBER;
+    //    BEGIN
+    //        SELECT UPPER(SUBSTR(NAZWISKO, 1, 1)) || LOWER(SUBSTR(NAZWISKO, 2))
+    //        INTO pLastName
+    //        FROM PRACOWNICY
+    //        WHERE ID_PRAC = pID;
+    //        IF SQL%NOTFOUND THEN
+    //            vReturn := 0;
+    //        ELSE
+    //            vReturn := 1;
+    //        END IF;
+    //        RETURN vReturn;
+    //    END;
+
+    private static void funkcja(Connection conn) {
+        try (CallableStatement stmt = conn.prepareCall(
+        "{? = call LastName(?, ?)}")){
+            stmt.setInt(2, 100);
+            stmt.registerOutParameter(1, Types.INTEGER);
+            stmt.registerOutParameter(3, Types.VARCHAR);
+
+            stmt.execute();
+            int success = stmt.getInt(1);
+            if (success == 1){
+                String result = stmt.getString(3);
+                System.out.println(result);
+            }else if (success == 0){
+                System.out.println("Złe ID pracownika!");
+            }
+        }catch (SQLException ex) {
+            System.out.println("Błąd wykonania polecenia: " + ex.getMessage());
         }
     }
 }
