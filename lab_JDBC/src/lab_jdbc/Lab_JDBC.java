@@ -48,23 +48,22 @@ public class Lab_JDBC {
 
     // Zadanie 1
     private static void zatrudnienieInfo(Connection conn){
-        try (Statement stmt = conn.createStatement();
-             ResultSet rs= stmt.executeQuery(
+        try (Statement stmt1 = conn.createStatement();
+             ResultSet rs= stmt1.executeQuery(
                      "select COUNT(nazwisko)" + "from pracownicy");
+
+             Statement stmt2 = conn.createStatement();
+             ResultSet nazwiska_zespoly = stmt2.executeQuery(
+                     "select nazwisko, nazwa from pracownicy p "
+                             + "left join zespoly z on p.id_zesp = z.id_zesp");
         ) {
             while(rs.next()) {
                 System.out.println("Zatrudniono " + rs.getInt(1) + " pracownikow, w tym:");
             }
 
-            ResultSet nazwiska_zespoly = stmt.executeQuery(
-                    "select nazwisko, nazwa from pracownicy p "
-                            + "left join zespoly z on p.id_zesp = z.id_zesp");
-
             while(nazwiska_zespoly.next()) {
                 System.out.println(nazwiska_zespoly.getString(1) + " w zespole " + nazwiska_zespoly.getString(2) + ",");
             }
-            nazwiska_zespoly.close();
-
         } catch(SQLException ex) {
             System.out.println("Błąd wykonania polecenia: "+ ex.getMessage());
         }
