@@ -41,7 +41,8 @@ public class Lab_JDBC {
 //        sprawdzAsystentow(conn);
 //        zwolnieniaZatrudnienia(conn);
 //        etatyTransakcje(conn);
-        prekompilowanePolecenia(conn);
+//        prekompilowanePolecenia(conn);
+        dodaj2000(conn);
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -215,6 +216,44 @@ public class Lab_JDBC {
                 }
                 rs_id.close();
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    // Zadanie 6
+    private static void dodaj2000(Connection conn) {
+        try (Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);) {
+
+//            // Sekwencyjnie
+//            long start = System.nanoTime();
+//            int changes = stmt.executeUpdate(
+//                    "insert into pracownicy(id_prac, nazwisko) values(" + 2000 + ", 'testprac')");
+//            for (int i = 1; i < 2000; i++){
+//                changes += stmt.executeUpdate(
+//                        "insert into pracownicy(id_prac, nazwisko) values(" + (2000 + i) + ", 'testprac')");
+//            }
+//            System.out.println("Dokonano " + changes + " zmian.");
+//            long czas = System.nanoTime() - start;
+//            System.out.println("Czas sekwencyjnego wykonania: " + czas); // wynik: 43666181000
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        // Wsadowe
+        try (PreparedStatement pstmt = conn.prepareStatement("insert into pracownicy(id_prac, nazwisko)" +
+                "values(?, ?)");) {
+            long start = System.nanoTime();
+            for (int i = 0; i < 2000; i++) {
+                pstmt.setInt(1, 4000+i);
+                pstmt.setString(2, "testpracwsad");
+                pstmt.addBatch();
+            }
+            pstmt.executeBatch();
+            long czas = System.nanoTime() - start;
+            System.out.println(czas); // wynik: 163066300
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
