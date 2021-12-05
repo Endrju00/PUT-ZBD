@@ -7,7 +7,7 @@
 <item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
 </engineerTo>
 <sourcePk>97B82567-AE2D-C7B5-CF25-B7D2015C5178</sourcePk>
-<identifying>true</identifying>
+<identifying>false</identifying>
 <nameOnSource>składa</nameOnSource>
 <nameOnTarget>jest złożone przez</nameOnTarget>
 <optionalSource>true</optionalSource>

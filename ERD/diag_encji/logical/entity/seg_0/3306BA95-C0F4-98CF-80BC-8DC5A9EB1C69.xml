@@ -68,7 +68,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>10</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Komentarz" id="681F004F-E94E-02F5-BA65-3DC5A9490021">
 <createdBy>Jakub</createdBy>
@@ -97,7 +97,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>100</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Ulica" id="FE87A80D-CB9F-D4D4-BAE8-476BD675F82E">
 <createdBy>Jakub</createdBy>
@@ -112,7 +112,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>100</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Kod_pocztowy" id="18835A45-43EA-B007-C6D3-5FDBE1F86C0D">
 <createdBy>Jakub</createdBy>
@@ -127,7 +127,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT025</logicalDatatype>
 <dataTypeSize>6</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>6,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Nr_ulicy" id="278B3836-DCD3-541D-67FF-33C12780F6A5">
 <createdBy>Jakub</createdBy>
@@ -142,7 +142,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>1000</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Kraj" id="A86DC768-A249-BB70-9B5C-7E667726DB3A">
 <createdBy>Jakub</createdBy>
@@ -157,6 +157,21 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id1" id="5E93D385-890C-4EEC-78F3-3DC603177E68">
+<createdBy>Jakub</createdBy>
+<createdTime>2021-11-24 21:39:11 UTC</createdTime>
+<generatorID>CAC7A892-7E91-29DB-27CB-D77021CC2166</generatorID>
+<ownerDesignName>diag_encji</ownerDesignName>
+<engineerTo>
+<item key="8E338ADA-B407-D65B-4983-9400B4B009E2" value="true"/>
+</engineerTo>
+<referedAttribute>97A38603-7F1A-BA93-FA58-B9F1EB2B94A5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>

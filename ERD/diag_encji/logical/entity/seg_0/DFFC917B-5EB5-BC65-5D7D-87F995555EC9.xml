@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DFFC917B-5EB5-BC65-5D7D-87F995555EC9" name="Dostawa">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DFFC917B-5EB5-BC65-5D7D-87F995555EC9" name="Dostarczony_towar">
 <createdBy>Jakub</createdBy>
 <createdTime>2021-11-23 10:47:08 UTC</createdTime>
 <ownerDesignName>diag_encji</ownerDesignName>
@@ -14,7 +14,7 @@
 <maxVolumes>9999999</maxVolumes>
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
-<preferredAbbreviation>Dostawy</preferredAbbreviation>
+<preferredAbbreviation>Dostarczone_towary</preferredAbbreviation>
 <shortName>Dos</shortName>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
 <Attribute name="Data" id="5BEC8226-882F-F8A8-07AF-112C58C99868">
