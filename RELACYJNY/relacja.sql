@@ -1,5 +1,5 @@
 create table Pracownicy(
-    id NUMERIC(10) primary key GENERATED ALWAYS AS IDENTITY,
+    id NUMERIC(10) GENERATED ALWAYS AS IDENTITY primary key,
     imie VARCHAR(100) not null,
     nazwisko VARCHAR(100) not null,
     nr_telefonu CHAR(9) not null,
@@ -10,13 +10,13 @@ create table Pracownicy(
 );
 
 create table Stanowiska(
-    nazwa VARCHAR(100) primary key,
+    nazwa VARCHAR(100) GENERATED ALWAYS AS IDENTITY primary key,
     placa_min NUMERIC(10, 2) not null,
     placa_max NUMERIC(10, 2) not null
 );
 
 create table Klienci(
-    id NUMERIC(10) primary key GENERATED ALWAYS AS IDENTITY,
+    id NUMERIC(10) GENERATED ALWAYS AS IDENTITY primary key,
     imie VARCHAR(100) not null,
     nazwisko VARCHAR(100) not null,
     nr_telefonu CHAR(9) not null,
@@ -25,27 +25,23 @@ create table Klienci(
 );
 
 create table Adresy(
+    id NUMERIC(10) GENERATED ALWAYS AS IDENTITY primary key,
     miasto VARCHAR(100),
     ulica VARCHAR(100),
     nr_ulicy VARCHAR(100),
     kod_pocztowy CHAR(6),
     kraj VARCHAR(100),
-    primary key(miasto, ulica, nr_ulicy, kod_pocztowy, kraj)
+    UNIQUE(miasto, ulica, nr_ulicy, kod_pocztowy, kraj)
 );
 
 create table Zamowienia(
-    numer NUMERIC(10) primary key GENERATED ALWAYS AS IDENTITY,
+    numer NUMERIC(10) primary key,
     data_zlozenia DATE not null,
     status VARCHAR(100) not null,
     komentarz VARCHAR(1000),
     id_pracownika NUMERIC(10) references Pracownicy(id) not null,
     id_klienta NUMERIC(10) references Klienci(id) not null,
-    miasto VARCHAR(100) not null,
-    ulica VARCHAR(100) not null,
-    nr_ulicy VARCHAR(100) not null,
-    kod_pocztowy CHAR(6) not null,
-    kraj VARCHAR(100) not null,
-    foreign key(miasto, ulica, nr_ulicy, kod_pocztowy, kraj) references Adresy(miasto, ulica, nr_ulicy, kod_pocztowy, kraj)
+    id_adresu NUMERIC(10) references Adresy(id) not null
 );
 
 create table Platnosci(
@@ -78,23 +74,21 @@ create table Hurtownie(
 );
 
 create table Dostarczone_towary(
+    id NUMERIC(10) GENERATED ALWAYS AS IDENTITY primary key,
     data DATE,
     ilosc NUMERIC(10) not null,
     cena_jednostkowa_zakupu NUMERIC(10, 2) not null,
     cena_jednostkowa_sprzedazy NUMERIC(10, 2) not null,
     kod_produktu NUMERIC(10) references Produkty(kod),
     hurtownia VARCHAR(100) references Hurtownie(nazwa),
-    primary key(data, kod_produktu, hurtownia)
+    UNIQUE(data, kod_produktu, hurtownia)
 );
 
 create table Pozycje_w_zamowieniach(
     ilosc_zamawiana NUMERIC(10) not null,
-    data DATE,
-    kod_produktu NUMERIC(10),
-    hurtownia VARCHAR(100),
+    id_dostawy NUMERIC(10) references Dostarczone_towary(id),
     numer_zamowienia NUMERIC(10) references Zamowienia(numer),
-    foreign key(data, kod_produktu, hurtownia) references Dostarczone_towary(data, kod_produktu, hurtownia),
-    primary key(numer_zamowienia, data, kod_produktu, hurtownia)
+    primary key(numer_zamowienia, id_dostawy)
 );
 
 CREATE OR REPLACE FUNCTION CenaZamowienia(pNumerZamowienia IN NUMBER)
